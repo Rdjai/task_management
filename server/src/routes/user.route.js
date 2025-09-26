@@ -4,7 +4,7 @@ import { authMiddlewere } from "../middlewares/Auth.middleware.js";
 import { roleMiddleware } from "../middlewares/role.middleware.js";
 const router = express.Router();
 
-router.post("/user/register", registerUser);
+router.post("/register", registerUser);
 router.post("/user/login", login);
 router.get("/user/me", authMiddlewere, userProfile);
 

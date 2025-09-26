@@ -13,7 +13,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 const router = express.Router();
 
 
-router.get("/search/all", authMiddlewere, roleMiddleware, getAllUsers);
+router.get("/search/all", getAllUsers);
 router.get("/search/single", authMiddlewere, roleMiddleware, getUserById);
 router.put("/updata", authMiddlewere, roleMiddleware, updateUser);
 router.delete("/:id", deleteUser);

@@ -52,43 +52,44 @@ export const deleteUser = async (req, res) => {
         });
     }
 };
-
 export const registerUser = async (req, res) => {
-
-    console.log(req.body);
+    console.log("Register body:", req.body);
     try {
         const { Name, email, password } = req.body;
 
-        if (!Name || !email || !password) res.status(400).json({
-            message: "something went wrong"
-        })
+        if (!Name || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
         const userExist = await UserModel.findOne({ email });
-        if (userExist) return res.status(400).json({ message: "User already exists" });
-        const hashpass = await bcrypt.hash(password, 5)
+        if (userExist) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+
+        const hashpass = await bcrypt.hash(password, 5);
+
         const user = await UserModel.create({
             name: Name,
             email: email,
             password: hashpass,
-        })
-        console.log(user);
-
-        const generateToken = generateJwt({
-            id: user._id
         });
 
-        if (user) {
-            return res.status(200).json({
-                name: user.name,
-                email: user.email,
-                role: user.role,
-                token: generateToken,
-            })
-        } else res.status(400).json({ message: "Invalid user data" });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid user data" });
+        }
+        const generateToken = generateJwt({ id: user._id });
 
+        return res.status(201).json({
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken,
+        })
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("Register Error:", error);
+        return res.status(500).json({ message: error.message });
     }
-}
+};
 
 export const login = async (req, res) => {
     try {
