@@ -55,9 +55,9 @@ export const deleteUser = async (req, res) => {
 export const registerUser = async (req, res) => {
     console.log("Register body:", req.body);
     try {
-        const { Name, email, password } = req.body;
+        const { name, email, password } = req.body;
 
-        if (!Name || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
@@ -69,7 +69,7 @@ export const registerUser = async (req, res) => {
         const hashpass = await bcrypt.hash(password, 5);
 
         const user = await UserModel.create({
-            name: Name,
+            name: name,
             email: email,
             password: hashpass,
         });
