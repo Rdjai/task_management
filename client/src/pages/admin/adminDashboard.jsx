@@ -4,6 +4,7 @@ import AddTaskForm from "./addTaskForm";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import MainPage from "./main";
 import UsersList from "./UsersList";
+import TasksList from "./TasksList";
 
 const AdminDashboard = () => {
   const [selectedPage, setSelectedPage] = useState("dashboard");
@@ -16,7 +17,7 @@ const AdminDashboard = () => {
         {selectedPage === "dashboard" && <MainPage />}
         {selectedPage === "users" && <UsersList />}
         {selectedPage === "add-task" && <AddTaskForm />}
-        {/* Add other pages similarly */}
+        {selectedPage === "tasks" && <TasksList />}
       </ScrollArea>
     </div>
   );

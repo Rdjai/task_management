@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage'
 import AdminDashboard from './pages/admin/adminDashboard'
 import LoginPage from './pages/auth/login'
 import RegisterPage from './pages/auth/register'
+import { ToastContainer } from "react-toastify";
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
 
@@ -12,13 +14,14 @@ function App() {
     {
       path: "/",
       element: <AppLayout />,
+      errorElement: <NotFoundPage />,
       children: [
         {
           path: "/",
           element: <HomePage />,
         },
         {
-          path: "/admin",
+          path: "/dashboard",
           element: <AdminDashboard />,
         },
         {
@@ -35,7 +38,10 @@ function App() {
   ])
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
   )
 }
 

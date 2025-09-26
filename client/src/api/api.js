@@ -4,10 +4,16 @@ const API_BASE_URL = "https://task-management-tf16.onrender.com/api/v1";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
-
-
 });
 
+console.log(api);
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
 
 export const registerUser = (name, email, password) => api.post("/user/register", { name, email, password },
     {
@@ -15,7 +21,7 @@ export const registerUser = (name, email, password) => api.post("/user/register"
     },
 );
 
-export const loginUser = (data) => api.post("/auth/login", data);
+export const loginUser = (data) => api.post("user/user/login", data);
 export const getProfile = () => api.get("/auth/profile");
 
 export const getAllUsers = () => api.get("/admin/search/all");
@@ -23,9 +29,10 @@ export const getUserById = (id) => api.get(`/users/${id}`);
 export const updateUser = (id, data) => api.put(`/users/${id}`, data);
 export const deleteUser = (id) => api.delete(`/users/${id}`);
 
-export const getAllTasks = () => api.get("/tasks");
+export const getAllTasks = () => api.get("/task/task");
 export const getTaskById = (id) => api.get(`/tasks/${id}`);
-export const createTask = (data) => api.post("/tasks", data);
+export const createTask = (data) => api.post("/task/create", data,
+);
 export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);
 export const deleteTask = (id) => api.delete(`/tasks/${id}`);
 

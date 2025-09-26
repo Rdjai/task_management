@@ -5,7 +5,7 @@ import Task from "../models/task.model.js";
 export const getAllUsers = async (req, res) => {
     try {
         const users = await User.find().select("-password");
-        res.json(users);
+        return res.json(users);
     } catch (error) {
         res.status(500).json({ message: "Server error fetching users" });
     }

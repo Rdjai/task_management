@@ -24,16 +24,16 @@ export default function RegisterPage() {
             setError("Passwords do not match!");
             return;
         }
-
-
         try {
             setLoading(true);
 
             const res = await registerUser(name, email, password);
 
             console.log("response", res);
+
             if (res) {
-                navigate("/login");
+                localStorage.setItem("token", res?.data?.token);
+                navigate("/");
             } else {
                 setError(res?.message || "Registration failed");
             }
