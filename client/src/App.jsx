@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AppLayout from './layout/AppLayout'
 import HomePage from './pages/HomePage'
 import AdminDashboard from './pages/admin/adminDashboard'
+import LoginPage from './pages/auth/login'
+import RegisterPage from './pages/auth/register'
 
 function App() {
 
@@ -18,6 +20,14 @@ function App() {
         {
           path: "/admin",
           element: <AdminDashboard />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+        {
+          path: "/signup",
+          element: <RegisterPage />,
         },
 
       ]
