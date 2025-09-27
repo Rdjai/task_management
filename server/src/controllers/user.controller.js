@@ -4,7 +4,7 @@ import { generateJwt } from '../utils/jwt.js'
 export const getUsers = async (req, res) => {
     try {
         const users = await UserModel.find().select("-password");
-        res.json(users);
+        return res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -21,7 +21,7 @@ export const updateUserRole = async (req, res) => {
         user.role = role || user.role;
         await user.save();
 
-        res.json({ message: "User role updated", user });
+        return res.status(200).json({ message: "User role updated", user });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -38,7 +38,7 @@ export const deleteUser = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        return res.json({ message: "User deleted successfully" });
+        return res.status(200).json({ message: "User deleted successfully" });
 
     } catch (error) {
         if (error.name === 'CastError') {
@@ -94,34 +94,41 @@ export const registerUser = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email || !password) res.status(400).json({
-            message: "something went wrong"
-        })
+
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Email and password are required",
+            });
+        }
+
         const user = await UserModel.findOne({ email });
-        if (!user) return res.status(404).json({
-            message: "something went wrong chech email or password"
-        })
-        const plainPass = bcrypt.compare(password, user.password);
-        if (!plainPass) return res.status(401).json({
-            message: "something went wrong"
-        })
-        const token = generateJwt({
-            id: user._id
-        });
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found, check email or password",
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({
+                message: "Invalid email or password",
+            });
+        }
+
+        const token = generateJwt({ id: user._id });
+
         return res.status(200).json({
             status: 200,
             user: {
-                Name: user.name,
-                email: user.email,
+                name: user.name,
                 role: user.role,
-                token: token
-            }
-        })
-
+                token: token,
+            },
+        });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
-}
+};
 
 
 export const userProfile = async (req, res) => {
@@ -130,12 +137,12 @@ export const userProfile = async (req, res) => {
         const user = await UserModel.findById(req.user.id);
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        return res.json({
+        return res.status(200).json({
             name: user.name,
             email: user.email,
             role: user.role,
         });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }

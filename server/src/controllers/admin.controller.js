@@ -5,9 +5,9 @@ import Task from "../models/task.model.js";
 export const getAllUsers = async (req, res) => {
     try {
         const users = await User.find().select("-password");
-        return res.json(users);
+        return res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching users" });
+        return res.status(500).json({ message: "Server error fetching users" });
     }
 };
 
@@ -25,9 +25,9 @@ export const getUserById = async (req, res) => {
             return res.status(404).json({ error: "User not found." });
         }
 
-        res.json(user);
+        return res.status(200).json(user);
     } catch (err) {
-        console.error("❌ getUserById Error:", err);
+        console.error("getUserById Error:", err);
         res.status(500).json({ error: "Server error", details: err.message });
 
     }
@@ -45,14 +45,14 @@ export const updateUser = async (req, res) => {
         if (email) user.email = email;
 
         const updatedUser = await user.save();
-        res.json({
+        return res.status(200).json({
             _id: updatedUser._id,
             name: updatedUser.name,
             email: updatedUser.email,
             role: updatedUser.role,
         });
     } catch (error) {
-        res.status(500).json({ message: "Server error updating user" });
+        return res.status(500).json({ message: "Server error updating user" });
     }
 };
 
@@ -63,9 +63,9 @@ export const deleteUser = async (req, res) => {
         if (!user) return res.status(404).json({ message: "User not found" });
 
         await user.deleteOne();
-        res.json({ message: "User removed successfully" });
+        return res.status(200).json({ message: "User removed successfully" });
     } catch (error) {
-        res.status(500).json({ message: "Server error deleting user" });
+        return res.status(500).json({ message: "Server error deleting user" });
     }
 };
 
@@ -76,13 +76,13 @@ export const getUserStats = async (req, res) => {
         const totalAdmins = await User.countDocuments({ role: "admin" });
         const totalRegularUsers = await User.countDocuments({ role: "user" });
 
-        res.json({
+        return res.status(200).json({
             totalUsers,
             totalAdmins,
             totalRegularUsers,
         });
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching user stats" });
+        return res.status(500).json({ message: "Server error fetching user stats" });
     }
 };
 
@@ -97,13 +97,13 @@ export const getTaskStats = async (req, res) => {
             { $group: { _id: "$user", taskCount: { $sum: 1 } } },
         ]);
 
-        res.json({
+        return res.status(200).json({
             totalTasks,
             completedTasks,
             pendingTasks,
             tasksByUser,
         });
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching task stats" });
+        return res.status(500).json({ message: "Server error fetching task stats" });
     }
 };

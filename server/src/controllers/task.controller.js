@@ -19,10 +19,10 @@ export const createTask = async (req, res) => {
         });
 
         const createdTask = await task.save();
-        res.status(201).json(createdTask);
+        return res.status(201).json(createdTask);
     } catch (error) {
         console.error("CreateTask Error:", error.message);
-        res.status(500).json({ message: "Server error creating task" });
+        return res.status(500).json({ message: "Server error creating task" });
     }
 };
 
@@ -36,9 +36,9 @@ export const getTasks = async (req, res) => {
         } else {
             tasks = await Task.find({ user: req.user._id });
         }
-        res.json(tasks);
+        return res.status(200).json(tasks);
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching tasks" });
+        return res.status(500).json({ message: "Server error fetching tasks" });
     }
 };
 
@@ -52,9 +52,9 @@ export const getTaskById = async (req, res) => {
             return res.status(403).json({ message: "Not authorized" });
         }
 
-        res.json(task);
+        return res.status(200).json(task);
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching task" });
+        return res.status(500).json({ message: "Server error fetching task" });
     }
 };
 
@@ -75,7 +75,7 @@ export const updateTask = async (req, res) => {
         if (status) task.status = status;
 
         const updatedTask = await task.save();
-        res.json(updatedTask);
+        return res.status(200).json(updatedTask);
     } catch (error) {
         res.status(500).json({ message: "Server error updating task" });
     }
@@ -92,18 +92,18 @@ export const deleteTask = async (req, res) => {
         }
 
         await task.deleteOne();
-        res.json({ message: "Task removed successfully" });
+        return res.status(200).json({ message: "Task deleted successfully" });
     } catch (error) {
-        res.status(500).json({ message: "Server error deleting task" });
+        return res.status(500).json({ message: "Server error deleting task" });
     }
 };
 
 export const getTaskCount = async (req, res) => {
     try {
         const total = await Task.countDocuments({ user: req.user._id });
-        res.json({ totalTasks: total });
+        return res.status(200).json({ total });
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching task count" });
+        return res.status(500).json({ message: "Server error fetching task count" });
     }
 };
 
@@ -120,9 +120,9 @@ export const getTasksByDeadline = async (req, res) => {
             deadline: { $lte: new Date(before) },
         });
 
-        res.json(tasks);
+        return res.status(200).json(tasks);
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching tasks by deadline" });
+        return res.status(500).json({ message: "Server error fetching tasks by deadline" });
     }
 };
 
@@ -132,8 +132,8 @@ export const getTaskSummary = async (req, res) => {
         const completed = await Task.countDocuments({ user: req.user._id, status: "completed" });
         const pending = await Task.countDocuments({ user: req.user._id, status: "pending" });
 
-        res.json({ completed, pending });
+        return res.status(200).json({ completed, pending });
     } catch (error) {
-        res.status(500).json({ message: "Server error fetching summary" });
+        return res.status(500).json({ message: "Server error fetching summary" });
     }
 };
