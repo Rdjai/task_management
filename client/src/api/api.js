@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://task-management-tf16.onrender.com/api/v1";
+const API_BASE_URL = "http://localhost:3000/api/v1";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -15,31 +15,35 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-export const registerUser = (name, email, password) => api.post("/user/register", { name, email, password },
-    {
-        "Content-Type": "application/json",
-    },
-);
-
+export const registerUser = (name, email, password) => api.post("/user/register", { name, email, password }, { "Content-Type": "application/json", },);
 export const loginUser = (data) => api.post("user/user/login", data);
 export const getProfile = () => api.get("/user/user/me");
-
 export const getAllUsers = () => api.get("/admin/search/all");
-export const getUserById = (id) => api.get(`/users/${id}`);
+
+
+//task
+export const getTask = (data) => api.get("/user/user/mytask", data);
+export const getMyTasks = () => api.get("/task/Mytask");
+export const getAllTasks = () => api.get("/task/Alltask");
+export const createTask = (data) => api.post("/task/create", data,);
+
+export const updateTask = (id, data) => api.put(`/task/${id}`, data);
+
+
+
+export const getTaskById = (id) => api.get(`/tasks/${id}`);
+export const deleteTask = (id) => api.delete(`/tasks/${id}`);
+
+
+// users 
+export const getUserById = (id) => api.get(`admin/search/single?id=${id}`);
 export const updateUser = (id, data) => api.put(`/users/${id}`, data);
 export const deleteUser = (id) => api.delete(`/users/${id}`);
 
-export const getAllTasks = () => api.get("/task/task");
-export const getTaskById = (id) => api.get(`/tasks/${id}`);
-export const createTask = (data) => api.post("/task/create", data,
-);
-export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);
-export const deleteTask = (id) => api.delete(`/tasks/${id}`);
+
 
 export const getReports = () => api.get("/reports");
-
 export const getNotifications = () => api.get("/notifications");
-
 export const getDocuments = () => api.get("/documents");
 export const uploadDocument = (formData) =>
     api.post("/documents", formData, {

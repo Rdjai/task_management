@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllTasks, getUserById } from "@/api/api";
+import { getMyTasks } from "@/api/api";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PuffLoader } from "react-spinners";
 
@@ -10,32 +10,18 @@ const TasksList = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchTasksWithUsers = async () => {
+        const fetchTasks = async () => {
             setLoading(true);
             try {
-                // Fetch all tasks
-                const res = await getAllTasks();
-                const tasksData = res.data.tasks || [];
+                const res = await getMyTasks();
+                console.log("Tasks API Response:", res.data);
 
-                // Fetch user details for each task
-                const tasksWithUserDetails = await Promise.all(
-                    tasksData.map(async (task) => {
-                        if (task.assignedTo) {
-                            try {
-                                const userRes = await getUserById(task.assignedTo);
-                                console.log("userRes", userRes);
-                                return { ...task, assignedUser: userRes.data }; // add full user data
-                            } catch (err) {
-                                console.error("Error fetching user:", err);
-                                return { ...task, assignedUser: null };
-                            }
-                        }
-                        return { ...task, assignedUser: null };
-                    })
-                );
+                const taskArray = Array.isArray(res.data)
+                    ? res.data
+                    : res.data?.data || [];
 
-                setTasks(tasksWithUserDetails);
-                setFilteredTasks(tasksWithUserDetails);
+                setTasks(taskArray);
+                setFilteredTasks(taskArray);
             } catch (err) {
                 console.error("Error fetching tasks:", err);
             } finally {
@@ -43,7 +29,7 @@ const TasksList = () => {
             }
         };
 
-        fetchTasksWithUsers();
+        fetchTasks();
     }, []);
 
     useEffect(() => {
@@ -92,20 +78,14 @@ const TasksList = () => {
                                         <td className="p-2 border">{task.title}</td>
                                         <td className="p-2 border">{task.description}</td>
                                         <td className="p-2 border">
-                                            {task.assignedUser
-                                                ? `${task.assignedUser.name} (${task.assignedUser.email})`
-                                                : "N/A"}
+                                            {task.assignedTo ? task.assignedTo.name : "N/A"}
                                         </td>
                                         <td className="p-2 border capitalize">{task.status}</td>
                                         <td className="p-2 border">
-                                            {task.deadline
-                                                ? new Date(task.deadline).toLocaleDateString()
-                                                : "—"}
+                                            {task.deadline ? new Date(task.deadline).toLocaleDateString() : "—"}
                                         </td>
                                         <td className="p-2 border">
-                                            {task.createdAt
-                                                ? new Date(task.createdAt).toLocaleDateString()
-                                                : "—"}
+                                            {task.createdAt ? new Date(task.createdAt).toLocaleDateString() : "—"}
                                         </td>
                                     </tr>
                                 ))
@@ -117,6 +97,7 @@ const TasksList = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </table>
                 </ScrollArea>
             )}

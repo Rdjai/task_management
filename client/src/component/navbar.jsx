@@ -37,15 +37,15 @@ const Navbar = () => {
                     <Link to="/" className="colors-primary hover:text-red-600 font-medium transition">
                         Home
                     </Link>
-                    <Link to="/about" className="colors-primary hover:text-red-600 font-medium transition">
-                        About
-                    </Link>
-                    <Link to="#" className="colors-primary hover:text-red-600 font-medium transition">
-                        Services
-                    </Link>
-                    <Link to="#" className="colors-primary hover:text-red-600 font-medium transition">
+                    <a href="https://rdjkashyap.vercel.app/" target="_blank" className="colors-primary hover:text-red-600 font-medium transition">
+                        Portfolio
+                    </a>
+                    <a href="https://github.com/Rdjai" target="_blank" className="colors-primary hover:text-red-600 font-medium transition">
+                        Github
+                    </a>
+                    <a href="https://www.linkedin.com/in/rdjkashyap/" target="_blank" className="colors-primary hover:text-red-600 font-medium transition">
                         Contact
-                    </Link>
+                    </a>
 
                     {!isLoggedIn ? (
                         <>

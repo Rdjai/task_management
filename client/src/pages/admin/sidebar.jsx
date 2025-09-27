@@ -49,27 +49,27 @@ const SideBaLink = [
         path: "/admin/tasks",
         api: "/api/v1/tasks"
     },
-    {
-        title: "Reports",
-        key: "reports",
-        icon: <BarChart />,
-        path: "/admin/reports",
-        api: "/api/v1/reports"
-    },
-    {
-        title: "Notifications",
-        key: "Notifications",
-        icon: <Bell />,
-        path: "/admin/notifications",
-        api: "/api/v1/notifications"
-    },
-    {
-        title: "Documents",
-        key: "documents",
-        icon: <FileText />,
-        path: "/admin/documents",
-        api: "/api/v1/documents"
-    },
+    // {
+    //     title: "Reports",
+    //     key: "reports",
+    //     icon: <BarChart />,
+    //     path: "/admin/reports",
+    //     api: "/api/v1/reports"
+    // },
+    // {
+    //     title: "Notifications",
+    //     key: "Notifications",
+    //     icon: <Bell />,
+    //     path: "/admin/notifications",
+    //     api: "/api/v1/notifications"
+    // },
+    // {
+    //     title: "Documents",
+    //     key: "documents",
+    //     icon: <FileText />,
+    //     path: "/admin/documents",
+    //     api: "/api/v1/documents"
+    // },
     {
         title: "Profile",
         key: "profile",
@@ -84,13 +84,13 @@ const SideBaLink = [
         path: "/admin/settings",
         api: "/api/v1/settings"
     },
-    {
-        title: "Database",
-        key: "database",
-        icon: <Database />,
-        path: "/admin/db",
-        api: "/api/v1/db"
-    },
+    // {
+    //     title: "Database",
+    //     key: "database",
+    //     icon: <Database />,
+    //     path: "/admin/db",
+    //     api: "/api/v1/db"
+    // },
     {
         title: "Logout",
         key: "logout",

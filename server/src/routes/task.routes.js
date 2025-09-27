@@ -8,6 +8,7 @@ import {
     getTaskCount,
     getTasksByDeadline,
     getTaskSummary,
+    getAllTasks,
 } from "../controllers/task.controller.js";
 import { authMiddlewere } from "../middlewares/Auth.middleware.js";
 import { roleMiddleware } from "../middlewares/role.middleware.js";
@@ -17,9 +18,10 @@ const router = express.Router();
 // router.use(authMiddlewere);
 
 router.post("/create", authMiddlewere, roleMiddleware, createTask);
-router.get("/task", authMiddlewere, roleMiddleware, getTasks);
+router.get("/Mytask", authMiddlewere, getTasks);
+router.get("/Alltask", authMiddlewere, roleMiddleware, getAllTasks);
 router.get("/:id", getTaskById);
-router.put("/:id", updateTask);
+router.put("/:id", authMiddlewere, updateTask);
 router.delete("/:id", deleteTask);
 
 router.get("/stats/count", getTaskCount);

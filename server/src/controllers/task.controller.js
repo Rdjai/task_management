@@ -27,20 +27,34 @@ export const createTask = async (req, res) => {
 };
 
 
+export const getAllTasks = async (req, res) => {
+    try {
+        const tasks = await Task.find()
+            .sort({ createdAt: -1 });
 
+        res.status(200).json({ tasks });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error fetching tasks" });
+    }
+};
 export const getTasks = async (req, res) => {
     try {
         let tasks;
+
         if (req.user.role === "admin") {
-            tasks = await Task.find().populate("user", "name email");
+            tasks = await Task.find().populate("assignedTo", "name email");
         } else {
-            tasks = await Task.find({ user: req.user.id });
+            tasks = await Task.find({ assignedTo: req.user.id }).populate("assignedTo", "name email");
         }
-        return res.status(200).json(tasks);
+
+        res.status(200).json({ success: true, data: tasks });
     } catch (error) {
+        console.error("Error fetching tasks:", error);
         return res.status(500).json({ message: "Server error fetching tasks" });
     }
 };
+
 
 
 export const getTaskById = async (req, res) => {
@@ -59,27 +73,27 @@ export const getTaskById = async (req, res) => {
 };
 
 export const updateTask = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status) return res.status(400).json({ message: "Status is required" });
+
     try {
-        const { title, description, deadline, status } = req.body;
-        const task = await Task.findById(req.params.id);
+        const task = await Task.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true }
+        );
 
         if (!task) return res.status(404).json({ message: "Task not found" });
 
-        if (req.user.role !== "admin" && task.user.toString() !== req.user._id.toString()) {
-            return res.status(403).json({ message: "Not authorized" });
-        }
-
-        if (title) task.title = title;
-        if (description) task.description = description;
-        if (deadline) task.deadline = deadline;
-        if (status) task.status = status;
-
-        const updatedTask = await task.save();
-        return res.status(200).json(updatedTask);
+        res.status(200).json({ message: "Task updated successfully", task });
     } catch (error) {
+        console.error("Update task error:", error);
         res.status(500).json({ message: "Server error updating task" });
     }
 };
+
 
 
 export const deleteTask = async (req, res) => {

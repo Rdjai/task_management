@@ -13,8 +13,7 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try {
-        const { userId } = req.body;
-
+        const userId = req.query.id;
         if (!userId) {
             return res.status(400).json({ error: "Authentication failed. User ID missing." });
         }

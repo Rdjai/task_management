@@ -7,7 +7,6 @@ const TaskStatsCard = ({ allTasks, loading }) => {
     return (
         <div className="flex flex-col md:flex-row bg-white p-6 rounded-lg shadow mt-6 text-gray-800">
 
-            {/* Completed Tasks */}
             <div className="flex-1 p-4 md:border-r border-gray-300">
                 <h3 className="text-xl font-semibold mb-4 text-green-600">✅ Completed Tasks</h3>
                 <ul className="space-y-3">
@@ -23,8 +22,6 @@ const TaskStatsCard = ({ allTasks, loading }) => {
                     ))}
                 </ul>
             </div>
-
-            {/* Pending Tasks */}
             <div className="flex-1 p-4">
                 <h3 className="text-xl font-semibold mb-4 text-yellow-600">⏳ Pending Tasks</h3>
                 <ul className="space-y-3">

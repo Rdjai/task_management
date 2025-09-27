@@ -19,6 +19,6 @@ router.put("/updata", authMiddlewere, roleMiddleware, updateUser);
 router.delete("/:id", deleteUser);
 
 router.get("/stats/users", authMiddlewere, roleMiddleware, getUserStats);
-router.get("/stats/tasks", authMiddlewere, roleMiddleware, getTaskStats);
+router.get("/stats/tasks", authMiddlewere, getTaskStats);
 
 export default router;
