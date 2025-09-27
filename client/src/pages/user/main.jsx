@@ -1,10 +1,12 @@
 import React from 'react'
+import Card from '../admin/card'
+
 
 const MainPage = () => {
     return (
-        <div>
-
-        </div>
+        <>
+            <Card ata={tasks} user={users} loading={loading} />
+        </>
     )
 }
 

@@ -9,16 +9,23 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // Check if user token exists
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        setIsLoggedIn(!!token);
+        const checkAuth = () => {
+            const token = localStorage.getItem("token");
+            setIsLoggedIn(!!token);
+        };
+
+        checkAuth();
+        window.addEventListener("storage", checkAuth);
+
+        return () => {
+            window.removeEventListener("storage", checkAuth);
+        };
     }, []);
 
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50">
             <div className="max-w-screen-xl mx-auto px-4 py-4 flex items-center justify-between">
-                {/* Logo */}
                 <Link to="/" className="flex items-center space-x-2">
                     <SiTask className="w-[35px] h-[35px] text-red-600" />
                     <SparklesText className="text-2xl font-bold colors-primary">
@@ -26,7 +33,6 @@ const Navbar = () => {
                     </SparklesText>
                 </Link>
 
-                {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-6">
                     <Link to="/" className="colors-primary hover:text-red-600 font-medium transition">
                         Home
@@ -66,7 +72,6 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Mobile Menu Button */}
                 <div className="md:hidden">
                     <button onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? <HiX className="w-6 h-6 text-gray-800" /> : <HiMenu className="w-6 h-6 text-gray-800" />}
@@ -74,7 +79,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
             {isOpen && (
                 <div className="md:hidden px-4 pb-4 space-y-2 bg-white shadow-md">
                     <Link to="/" className="block py-2 font-medium hover:text-red-600">

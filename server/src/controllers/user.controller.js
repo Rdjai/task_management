@@ -1,4 +1,5 @@
 import UserModel from "../models/user.model.js";
+import Task from "../models/task.model.js";
 import bcrypt from 'bcryptjs'
 import { generateJwt } from '../utils/jwt.js'
 export const getUsers = async (req, res) => {
@@ -146,3 +147,27 @@ export const userProfile = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 }
+
+export const getUserTasks = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const tasks = await Task.find({ assignedTo: userId }).sort({ createdAt: -1 });
+
+        const completedCount = await Task.countDocuments({ assignedTo: userId, status: "done" });
+        const pendingCount = await Task.countDocuments({ assignedTo: userId, status: "pending" });
+        const inProgressCount = await Task.countDocuments({ assignedTo: userId, status: "in-progress" });
+
+        res.status(200).json({
+            tasks,
+            stats: {
+                completed: completedCount,
+                pending: pendingCount,
+                inProgress: inProgressCount
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching user tasks:", error);
+        res.status(500).json({ message: "Server error fetching tasks" });
+    }
+};

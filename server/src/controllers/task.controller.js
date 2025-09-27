@@ -34,7 +34,7 @@ export const getTasks = async (req, res) => {
         if (req.user.role === "admin") {
             tasks = await Task.find().populate("user", "name email");
         } else {
-            tasks = await Task.find({ user: req.user._id });
+            tasks = await Task.find({ user: req.user.id });
         }
         return res.status(200).json(tasks);
     } catch (error) {
