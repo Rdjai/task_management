@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import UserSidebar from "./userSidebar";
-import MainPage from "./main";
+import UserSidebar from "./userSidebar.jsx";
+import MainPage from "./main.jsx";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import MyTasksPage from "./MyTasksPage";
-import UserProfilePage from "./userProfilePage";
-import UserSettingPage from "./UserSettingPage";
+import MyTasksPage from "./MyTasksPage.jsx";
+import UserProfilePage from "./userProfilePage.jsx";
+import UserSettingPage from "./UserSettingPage.jsx";
 import { Navigate } from "react-router-dom";
-import TasksList from "./TasksList";
+import TasksList from "./TasksList.jsx";
 
 const UserDashboard = () => {
 

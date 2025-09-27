@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./card";
-import TaskStatsCard from "./taskStatsCard";
+import TaskStatsCard from "./taskStatsCard.jsx";
 import { getAllTasks, getAllUsers } from "@/api/api";
 import { format } from "date-fns";
 

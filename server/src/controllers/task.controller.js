@@ -55,8 +55,6 @@ export const getTasks = async (req, res) => {
     }
 };
 
-
-
 export const getTaskById = async (req, res) => {
     try {
         const task = await Task.findById(req.params.id).populate("user", "name email");

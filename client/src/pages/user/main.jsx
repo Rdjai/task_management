@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getTask } from "@/api/api";
-import Card from "@/pages/component/card";
-import NewTasks from "../component/newActivity";
-import Activity from "../component/Activity";
+import Card from "@/pages/component/card.jsx";
+import NewTasks from "../component/newActivity.jsx";
+import Activity from "../component/Activity.jsx";
 const AdminDashboard = () => {
     const [tasks, setTasks] = useState([]);
     const [stats, setStats] = useState({

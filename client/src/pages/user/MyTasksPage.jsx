@@ -6,7 +6,6 @@ const MyTasksPage = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Fetch user tasks
     const fetchTasks = async () => {
         setLoading(true);
         try {
@@ -23,13 +22,11 @@ const MyTasksPage = () => {
         fetchTasks();
     }, []);
 
-    // Update task status
     const handleStatusUpdate = async (taskId, newStatus) => {
         try {
             const res = await updateTask(taskId, { status: newStatus });
             console.log("Updated task response:", res.data);
 
-            // Update local state for instant UI feedback
             setTasks((prevTasks) =>
                 prevTasks.map((task) =>
                     task._id === taskId ? { ...task, status: newStatus } : task
@@ -80,7 +77,7 @@ const MyTasksPage = () => {
                                 Status: {task.status}
                             </p>
 
-                            {/* Buttons to update status */}
+
                             {task.status !== "done" && (
                                 <div className="mt-3 flex gap-2">
                                     <button

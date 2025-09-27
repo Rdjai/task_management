@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import AdminSidebar from "./sidebar";
-import AddTaskForm from "./addTaskForm";
+import AdminSidebar from "./sidebar.jsx";
+import AddTaskForm from "./addTaskForm.jsx";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import MainPage from "./main";
-import UsersList from "./UsersList";
-import TasksList from "./TasksList";
-import UserSettingPage from "./adminSettign";
-import UserProfilePage from "./AdminProfile";
+import MainPage from "./main.jsx";
+import UsersList from "./UsersList.jsx";
+import TasksList from "./TasksList.jsx";
+import UserSettingPage from "./adminSettign.jsx";
+import UserProfilePage from "./AdminProfile.jsx";
 import { Navigate } from "react-router-dom";
 
 const AdminDashboard = () => {

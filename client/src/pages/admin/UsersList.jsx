@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers } from "@/api/api"; // your API call
+import { getAllUsers } from "@/api/api";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { PuffLoader } from "react-spinners"; // you can use any loader library
+import { PuffLoader } from "react-spinners";
 
 const UsersList = () => {
     const [users, setUsers] = useState([]);
@@ -36,7 +36,7 @@ const UsersList = () => {
         <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">All Users</h2>
 
-            {/* Search Input */}
+
             <input
                 type="text"
                 placeholder="Search by name..."
@@ -45,7 +45,7 @@ const UsersList = () => {
                 className="border p-2 rounded w-full mb-4"
             />
 
-            {/* Loader */}
+
             {loading ? (
                 <div className="flex justify-center items-center h-64">
                     <PuffLoader color="#F59E0B" size={50} />

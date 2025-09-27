@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SiTask } from "react-icons/si";
 import { HiMenu, HiX } from "react-icons/hi";
 import { SparklesText } from "@/components/ui/sparkles-text";
-import { Highlighter } from "@/components/ui/highlighter";
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

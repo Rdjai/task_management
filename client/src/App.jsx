@@ -1,14 +1,14 @@
 import './App.css'
 import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AppLayout from './layout/AppLayout'
-import HomePage from './pages/HomePage'
-import AdminDashboard from './pages/admin/adminDashboard'
-import LoginPage from './pages/auth/login'
-import RegisterPage from './pages/auth/register'
+import AppLayout from './layout/AppLayout.jsx'
+import HomePage from './pages/HomePage.jsx'
+import AdminDashboard from './pages/admin/adminDashboard.jsx'
+import LoginPage from './pages/auth/login.jsx'
+import RegisterPage from './pages/auth/register.jsx'
 import { ToastContainer } from "react-toastify";
-import NotFoundPage from './pages/NotFoundPage'
-import UserDashboard from './pages/user/UserDashboard'
+import NotFoundPage from './pages/NotFoundPage.jsx'
+import UserDashboard from './pages/user/UserDashboard.jsx'
 
 function App() {
   // Store role in state

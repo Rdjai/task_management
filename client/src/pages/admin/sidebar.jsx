@@ -1,10 +1,6 @@
 import React from 'react'
 import { ScrollArea } from "@/components/ui/scroll-area"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+
 import {
     House,
     Users,
