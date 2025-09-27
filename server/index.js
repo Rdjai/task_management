@@ -16,7 +16,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors(
     {
-        origin: 'http://localhost:5173',
+        origin: 'https://task-management-tawny-mu-73.vercel.app',
         credentials: true,
     }
 ));
