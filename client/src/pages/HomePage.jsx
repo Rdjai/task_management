@@ -20,7 +20,7 @@ const HomePage = () => {
             </p>
 
             <div className="flex gap-4">
-                <Link to="/admin" className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300">
+                <Link to="/dashboard" className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300">
                     Get Started
                 </Link>
                 <Link to="/dashboard" className="bg-white hover:bg-gray-100 text-red-500 font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300">

@@ -113,6 +113,7 @@ export const login = async (req, res) => {
             user: {
                 Name: user.name,
                 email: user.email,
+                role: user.role,
                 token: token
             }
         })
@@ -129,7 +130,7 @@ export const userProfile = async (req, res) => {
         const user = await UserModel.findById(req.user.id);
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        res.json({
+        return res.json({
             name: user.name,
             email: user.email,
             role: user.role,

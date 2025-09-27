@@ -17,6 +17,9 @@ export default function LoginPage() {
     try {
       const res = await loginUser({ email, password });
       localStorage.setItem("token", res.data.user.token);
+      localStorage.setItem("role", res.data.user.role);
+      console.log("res.data.user.", res.data.user);
+
       // localStorage.setItem("user", JSON.stringify(res.data));
 
       navigate("/dashboard");

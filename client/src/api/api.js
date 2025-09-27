@@ -22,7 +22,7 @@ export const registerUser = (name, email, password) => api.post("/user/register"
 );
 
 export const loginUser = (data) => api.post("user/user/login", data);
-export const getProfile = () => api.get("/auth/profile");
+export const getProfile = () => api.get("/user/user/me");
 
 export const getAllUsers = () => api.get("/admin/search/all");
 export const getUserById = (id) => api.get(`/users/${id}`);

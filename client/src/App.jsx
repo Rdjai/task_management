@@ -8,7 +8,9 @@ import RegisterPage from './pages/auth/register'
 import { ToastContainer } from "react-toastify";
 import NotFoundPage from './pages/NotFoundPage'
 
+
 function App() {
+
 
   const router = createBrowserRouter([
     {

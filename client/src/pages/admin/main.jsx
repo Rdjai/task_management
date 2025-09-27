@@ -40,8 +40,8 @@ const MainPage = () => {
                 ) : (
                     <ul className="space-y-3 text-gray-700">
                         {tasks
-                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // newest first
-                            .slice(0, 5) // show last 5 tasks
+                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                            .slice(0, 5)
                             .map((task) => {
                                 const user = users.find((u) => u._id === task.assignedTo);
                                 return (
