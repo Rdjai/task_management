@@ -7,9 +7,11 @@ import LoginPage from './pages/auth/login'
 import RegisterPage from './pages/auth/register'
 import { ToastContainer } from "react-toastify";
 import NotFoundPage from './pages/NotFoundPage'
+import UserDashboard from './pages/user/userSidebar,'
 
 
 function App() {
+  const getrole = localStorage.getItem("role")
 
 
   const router = createBrowserRouter([
@@ -24,7 +26,7 @@ function App() {
         },
         {
           path: "/dashboard",
-          element: <AdminDashboard />,
+          element: getrole === "admin" ? <AdminDashboard /> : <UserDashboard />,
         },
         {
           path: "/login",
