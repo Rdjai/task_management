@@ -10,13 +10,13 @@ It allows **users** to create and manage tasks, and provides an **admin dashboar
 ## 📸 Screenshots  
 
 ### 🔑 Home Page  
-![Home_page](./screenshots/home.png)  
+![Home_page](./screenshot/home.png)  
 
 ### 📋 User login
-![User Dashboard](./screenshots/login.png)  
+![User Dashboard](./screenshot/login.png)  
 
 ### 👨‍💼 Admin Dashboard  
-![Admin Dashboard](./screenshots/admin_dash.png)  
+![Admin Dashboard](./screenshot/admin_dash.png)  
 
 
 ### 👤 User  
